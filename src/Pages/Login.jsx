@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loadCSS } from 'fg-loadcss';
-import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
+import { Grid, TextField, Button, Card, Typography, Icon } from '@material-ui/core';
 import { Alert } from 'react-bootstrap';
-import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import authentication from '../firebaseConfig';
