@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { Typography, Button, Fab } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import { loadCSS } from 'fg-loadcss';
 import { makeStyles } from '@material-ui/core/styles';
-import UserPerfil from '@material-ui/icons/AccountCircleRounded';
+import UserPerfilIcon from '@material-ui/icons/AccountCircleOutlined';
+import AgendaIcon from '@material-ui/icons/EventOutlined';
+import PacientesIcon from '@material-ui/icons/PeopleOutline';
 import ExitAppIcon from '@material-ui/icons/ExitToApp';
+import FrequenciaIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 import scheduleContext from '../Context/Context';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,23 +44,23 @@ export default function Header() {
   return (
     <div className={ classes.root }>
       <Button>
-        <UserPerfil />
+        <UserPerfilIcon />
         <Typography>Perfil</Typography>
       </Button>
       <Button>
-        <UserPerfil />
+        <PacientesIcon />
         <Typography>Pacientes</Typography>
       </Button>
       <Button>
-        <UserPerfil />
+        <AgendaIcon />
         <Typography>Agenda</Typography>
       </Button>
       <Button>
-        <UserPerfil />
+        <FrequenciaIcon />
         <Typography>Frequência</Typography>
       </Button>
-      <Button aria-label="exit">
-        <ExitAppIcon />
+      <Button aria-label="exit" color="secondary">
+        <ExitAppIcon color="error" />
         <Typography>Sair</Typography>
       </Button>
     </div>
