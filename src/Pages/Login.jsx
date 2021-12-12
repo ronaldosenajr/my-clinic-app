@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { loadCSS } from 'fg-loadcss';
 import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
 import { Alert } from 'react-bootstrap';
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleContainer() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -55,6 +57,7 @@ export default function SimpleContainer() {
       console.log(user);
       setUser(user);
       setPassword('');
+      history.push('/main');
     } catch (error) {
       console.log(error);
       showSignInError();
