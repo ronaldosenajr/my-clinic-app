@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const scheduleOfficer = createContext();
+const scheduleContext = createContext();
 
-export default scheduleOfficer;
+export default scheduleContext;

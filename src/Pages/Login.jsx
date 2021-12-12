@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { loadCSS } from 'fg-loadcss';
 import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
 import { Alert } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import authentication from '../firebaseConfig';
+import scheduleContext from '../Context/Context';
 
 const marginPaddingWidth = 4;
 
@@ -35,6 +36,7 @@ export default function SimpleContainer() {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
+  const { setUser } = useContext(scheduleContext);
 
   const showSignInError = () => {
     const waitTimer = 2000;
@@ -51,6 +53,8 @@ export default function SimpleContainer() {
       );
       const { user } = userCredential;
       console.log(user);
+      setUser(user);
+      setPassword('');
     } catch (error) {
       console.log(error);
       showSignInError();
