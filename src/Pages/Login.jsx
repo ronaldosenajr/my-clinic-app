@@ -54,9 +54,9 @@ export default function SimpleContainer() {
         authentication, userEmail, password,
       );
       const { user } = userCredential;
-      console.log(user);
-      setUser(user);
       setPassword('');
+      setUser(user);
+      localStorage.setItem('user', JSON.stringify(user));
       history.push('/main');
     } catch (error) {
       console.log(error);
