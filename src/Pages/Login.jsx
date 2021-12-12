@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { loadCSS } from 'fg-loadcss';
 import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
+import { Alert } from 'react-bootstrap';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -33,6 +34,15 @@ export default function SimpleContainer() {
 
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  const showSignInError = () => {
+    const waitTimer = 2000;
+    setShowError(true);
+    setTimeout(() => {
+      setShowError(false);
+    }, waitTimer);
+  };
 
   const signIn = async () => {
     try {
@@ -43,6 +53,7 @@ export default function SimpleContainer() {
       console.log(user);
     } catch (error) {
       console.log(error);
+      showSignInError();
     }
   };
 
@@ -101,6 +112,16 @@ export default function SimpleContainer() {
             >
               Entrar
             </Button>
+          </Grid>
+          <Grid>
+            {showError ? (
+              <Alert
+                variant="danger"
+                style={ { textAlign: 'center' } }
+              >
+                Usuário ou senha incorreto
+              </Alert>
+            ) : ''}
           </Grid>
         </Card>
       </form>
