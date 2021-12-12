@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import scheduleOfficer from './Context';
 
 function ScheduleProvider({ children }) {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState({});
 
   const contextValue = {
     user,

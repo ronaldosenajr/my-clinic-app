@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Typography, Button } from '@material-ui/core';
 import { loadCSS } from 'fg-loadcss';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +9,7 @@ import PacientesIcon from '@material-ui/icons/PeopleOutline';
 import ExitAppIcon from '@material-ui/icons/ExitToApp';
 import FrequenciaIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 import scheduleContext from '../Context/Context';
+import authentication from '../firebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,13 +26,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
-  const { user, setUser } = useContext(scheduleContext);
+  const { setUser } = useContext(scheduleContext);
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     const getLocalStorage = JSON.parse(localStorage.getItem('user'));
     setUser(getLocalStorage);
   }, [setUser]);
+
+  const logOut = async () => {
+    await authentication.signOut();
+    setUser({});
+    localStorage.setItem('user', JSON.stringify({}));
+    history.push('/');
+  };
 
   useEffect(() => {
     const node = loadCSS(
@@ -59,7 +69,7 @@ export default function Header() {
         <FrequenciaIcon />
         <Typography>Frequência</Typography>
       </Button>
-      <Button aria-label="exit" color="secondary">
+      <Button aria-label="exit" color="secondary" onClick={ logOut }>
         <ExitAppIcon color="error" />
         <Typography>Sair</Typography>
       </Button>
