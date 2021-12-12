@@ -116,7 +116,7 @@ dist
 /build
 
 # misc
-/src/firebase.js
+/src/firebaseConfig.js
 .DS_Store
 .env.local
 .env.development.local
