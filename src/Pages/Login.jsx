@@ -37,6 +37,7 @@ export default function SimpleContainer() {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
   const { setUser } = useContext(scheduleContext);
 
   const showSignInError = () => {
@@ -45,6 +46,16 @@ export default function SimpleContainer() {
     setTimeout(() => {
       setShowError(false);
     }, waitTimer);
+  };
+
+  const validateEmail = (email) => {
+    setUserEmail(email);
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (regex.test(email)) {
+      setEmailValid(false);
+    } else {
+      setEmailValid(true);
+    }
   };
 
   const signIn = async () => {
@@ -97,8 +108,9 @@ export default function SimpleContainer() {
               id="email"
               label="Email"
               type="email"
+              error={ emailValid }
               value={ userEmail }
-              onChange={ ({ target }) => setUserEmail(target.value) }
+              onChange={ ({ target }) => validateEmail(target.value) }
             />
           </Grid>
           <Grid item xs zeroMinWidth className={ classes.grid }>
