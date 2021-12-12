@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadCSS } from 'fg-loadcss';
 import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import authentication from '../firebaseConfig';
 
 const marginPaddingWidth = 4;
 
@@ -22,10 +24,27 @@ const useStyles = makeStyles((theme) => ({
   card: {
     width: `${theme.spacing(marginPaddingWidth)}vw`,
     minWidth: 320,
+    backgroundColor: '#F8F8F1',
   },
 }));
+
 export default function SimpleContainer() {
   const classes = useStyles();
+
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signIn = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        authentication, userEmail, password,
+      );
+      const { user } = userCredential;
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const node = loadCSS(
@@ -43,23 +62,45 @@ export default function SimpleContainer() {
       <form>
         <Card variant="outlined" className={ classes.card }>
           <Grid item xs zeroMinWidth className={ classes.grid }>
-            <Icon className="far fa-calendar-check" color="primary" fontSize="large" />
+            <Icon
+              className="far fa-calendar-check"
+              style={ { color: '#04294D' } }
+              fontSize="large"
+            />
             <Typography
-              color="primary"
-              variant="h4"
+              style={ { color: '#04294D' } }
+              variant="h5"
               align="center"
             >
               Faça o seu login
             </Typography>
           </Grid>
           <Grid item xs zeroMinWidth className={ classes.grid }>
-            <TextField id="standard-basic" label="Email" type="email" />
+            <TextField
+              id="email"
+              label="Email"
+              type="email"
+              value={ userEmail }
+              onChange={ ({ target }) => setUserEmail(target.value) }
+            />
           </Grid>
           <Grid item xs zeroMinWidth className={ classes.grid }>
-            <TextField id="standard-basic" label="Senha" type="password" />
+            <TextField
+              id="password"
+              label="Senha"
+              type="password"
+              value={ password }
+              onChange={ ({ target }) => setPassword(target.value) }
+            />
           </Grid>
           <Grid item xs zeroMinWidth className={ classes.grid }>
-            <Button variant="contained" color="primary">Entrar</Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={ signIn }
+            >
+              Entrar
+            </Button>
           </Grid>
         </Card>
       </form>
