@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button } from '@material-ui/core';
+import { Tabs, Tab } from '@material-ui/core';
 import { loadCSS } from 'fg-loadcss';
 import { makeStyles } from '@material-ui/core/styles';
 import UserPerfilIcon from '@material-ui/icons/AccountCircleOutlined';
@@ -16,12 +16,9 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
     },
-    width: '100%',
-    display: 'flex',
-    alignContent: 'cente',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     border: '1px solid gray',
+    flexGrow: 1,
+    maxWidth: 500,
   },
 }));
 
@@ -29,11 +26,16 @@ export default function Header() {
   const { setUser } = useContext(scheduleContext);
   const classes = useStyles();
   const history = useHistory();
+  const [value, setNewValue] = useState(0);
 
   useEffect(() => {
     const getLocalStorage = JSON.parse(localStorage.getItem('user'));
     setUser(getLocalStorage);
   }, [setUser]);
+
+  const handleChange = (event, newValue) => {
+    setNewValue(newValue);
+  };
 
   const logOut = async () => {
     await authentication.signOut();
@@ -53,26 +55,20 @@ export default function Header() {
   }, []);
   return (
     <div className={ classes.root }>
-      <Button>
-        <UserPerfilIcon />
-        <Typography>Perfil</Typography>
-      </Button>
-      <Button>
-        <PacientesIcon />
-        <Typography>Pacientes</Typography>
-      </Button>
-      <Button>
-        <AgendaIcon />
-        <Typography>Agenda</Typography>
-      </Button>
-      <Button>
-        <FrequenciaIcon />
-        <Typography>Frequência</Typography>
-      </Button>
-      <Button aria-label="exit" color="secondary" onClick={ logOut }>
-        <ExitAppIcon color="error" />
-        <Typography>Sair</Typography>
-      </Button>
+      <Tabs
+        value={ value }
+        onChange={ handleChange }
+        variant="fullWidth"
+        indicatorColor="primary"
+        textColor="primary"
+        aria-label="menu items"
+      >
+        <Tab icon={ <UserPerfilIcon /> } label="Perfil" />
+        <Tab icon={ <PacientesIcon /> } label="Pacientes" />
+        <Tab icon={ <FrequenciaIcon /> } label="Frequência" />
+        <Tab icon={ <AgendaIcon /> } label="Agenda" />
+        <Tab icon={ <ExitAppIcon /> } label="Sair" onClick={ logOut } />
+      </Tabs>
     </div>
   );
 }

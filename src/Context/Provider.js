@@ -4,10 +4,13 @@ import scheduleOfficer from './Context';
 
 function ScheduleProvider({ children }) {
   const [user, setUser] = useState({});
+  const [tabValue, setTabValue] = useState(0);
 
   const contextValue = {
     user,
     setUser,
+    tabValue,
+    setTabValue,
   };
   return (
     <scheduleOfficer.Provider value={ contextValue }>
