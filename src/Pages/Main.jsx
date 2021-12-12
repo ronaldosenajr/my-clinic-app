@@ -11,6 +11,7 @@ export default function Main() {
       <NewHeader />
       <TabPanel value={ tabValue } index={ 0 }>
         Usuario
+        {' '}
         {user.email}
       </TabPanel>
       <TabPanel value={ tabValue } index={ 1 }>
