@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { loadCSS } from 'fg-loadcss';
-import { Grid, TextField, Button, Card } from '@material-ui/core';
+import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -37,13 +37,20 @@ export default function SimpleContainer() {
       node.parentNode.removeChild(node);
     };
   }, []);
+
   return (
     <div className={ classes.root }>
       <form>
         <Card variant="outlined" className={ classes.card }>
           <Grid item xs zeroMinWidth className={ classes.grid }>
             <Icon className="far fa-calendar-check" color="primary" fontSize="large" />
-            <h1>Login</h1>
+            <Typography
+              color="primary"
+              variant="h4"
+              align="center"
+            >
+              Faça o seu login
+            </Typography>
           </Grid>
           <Grid item xs zeroMinWidth className={ classes.grid }>
             <TextField id="standard-basic" label="Email" type="email" />
