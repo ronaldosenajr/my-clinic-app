@@ -50,11 +50,10 @@ export default function SimpleContainer() {
 
   const validateEmail = (email) => {
     setUserEmail(email);
+    setEmailValid(true);
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (regex.test(email)) {
       setEmailValid(false);
-    } else {
-      setEmailValid(true);
     }
   };
 
@@ -137,7 +136,7 @@ export default function SimpleContainer() {
                 variant="danger"
                 style={ { textAlign: 'center' } }
               >
-                Usuário ou senha incorreto
+                Email ou senha incorreto
               </Alert>
             ) : ''}
           </Grid>
