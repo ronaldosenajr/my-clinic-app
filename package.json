@@ -3,11 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
+    "@heroicons/react": "^1.0.5",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.4",
     "@testing-library/user-event": "^10.1.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "bootstrap": "^5.1.3",
+    "react": "^16.14.0",
+    "react-bootstrap": "^2.0.3",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
@@ -33,9 +39,11 @@
   },
   "devDependencies": {
     "@sheerun/mutationobserver-shim": "^0.3.3",
+    "autoprefixer": "^10.4.0",
     "eslint": "6.8.0",
     "eslint-config-trybe-frontend": "1.2.0",
     "eslint-plugin-babel": "^5.3.1",
+    "postcss": "^8.4.4",
     "stylelint": "^13.8.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0"
