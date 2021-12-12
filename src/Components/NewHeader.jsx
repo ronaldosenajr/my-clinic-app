@@ -19,7 +19,7 @@ function a11yProps(index) {
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#F8F8F12',
+    backgroundColor: '#F8F8F1',
   },
 }));
 
