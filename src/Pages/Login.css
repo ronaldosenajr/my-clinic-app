@@ -5,23 +5,26 @@
 
 .login-main {
 	display: flex;
-	align-items: center;
 	justify-content: center;
 }
 
 .login-forms {
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	background-color: #F8F8F1;
-	padding: 100px 100px ;
-	margin-top: 2%;
+	margin-top: 2rem;
+	padding: 2rem 2rem;
+	width: 20rem;
+	box-shadow: 2px 2px 2px 1px rgba(6, 7, 14, 0.2);
 }
 
 .login-forms h1 {
 	color: #0D0E1C;
+	margin-bottom: 50%;
 }
 
 .login-input {
-	margin-top: 2%;
+	margin-bottom: 5%;
 }
