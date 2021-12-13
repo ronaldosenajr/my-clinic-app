@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loadCSS } from 'fg-loadcss';
-import { Grid, TextField, Button, Card, Typography } from '@material-ui/core';
+import { Grid, TextField, Button, Card, Typography, Icon } from '@material-ui/core';
 import { Alert } from 'react-bootstrap';
-import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import authentication from '../firebaseConfig';
@@ -38,6 +37,7 @@ export default function SimpleContainer() {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
   const { setUser } = useContext(scheduleContext);
 
   const showSignInError = () => {
@@ -48,15 +48,24 @@ export default function SimpleContainer() {
     }, waitTimer);
   };
 
+  const validateEmail = (email) => {
+    setUserEmail(email);
+    setEmailValid(true);
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (regex.test(email)) {
+      setEmailValid(false);
+    }
+  };
+
   const signIn = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         authentication, userEmail, password,
       );
       const { user } = userCredential;
-      console.log(user);
-      setUser(user);
       setPassword('');
+      setUser(user);
+      // localStorage.setItem('user', JSON.stringify(user));
       history.push('/main');
     } catch (error) {
       console.log(error);
@@ -98,8 +107,9 @@ export default function SimpleContainer() {
               id="email"
               label="Email"
               type="email"
+              error={ emailValid }
               value={ userEmail }
-              onChange={ ({ target }) => setUserEmail(target.value) }
+              onChange={ ({ target }) => validateEmail(target.value) }
             />
           </Grid>
           <Grid item xs zeroMinWidth className={ classes.grid }>
@@ -126,7 +136,7 @@ export default function SimpleContainer() {
                 variant="danger"
                 style={ { textAlign: 'center' } }
               >
-                Usuário ou senha incorreto
+                Email ou senha incorreto
               </Alert>
             ) : ''}
           </Grid>
