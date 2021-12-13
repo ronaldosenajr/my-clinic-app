@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -24,7 +24,16 @@ describe('Testa a Tela de Login', () => {
 
   it('Se é exibido um Botão com o texto "Entrar"', () => {
     renderWithRouter(<App />);
-    const passwordInput = screen.getByRole('button', { name: 'ENTRAR' });
-    expect(passwordInput).toBeInTheDocument();
+    const logInButton = screen.getByRole('button', { name: 'ENTRAR' });
+    expect(logInButton).toBeInTheDocument();
+  });
+
+  it(`Se é exibido um Texto dizendo "Email ou senha inválidos"
+   quando não insere um email ou senha corretos`, async () => {
+    renderWithRouter(<App />);
+    const logInButton = screen.getByRole('button', { name: 'ENTRAR' });
+    fireEvent.click(logInButton);
+    const invalidEmailText = await screen.findByText('Email ou senha inválidos');
+    expect(invalidEmailText).toBeInTheDocument();
   });
 });
