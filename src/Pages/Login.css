@@ -1,0 +1,27 @@
+* {
+	margin: 0;
+	font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.login-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-forms {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #F8F8F1;
+	padding: 100px 100px ;
+	margin-top: 2%;
+}
+
+.login-forms h1 {
+	color: #0D0E1C;
+}
+
+.login-input {
+	margin-top: 2%;
+}
