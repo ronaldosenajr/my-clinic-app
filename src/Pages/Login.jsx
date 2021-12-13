@@ -2,29 +2,11 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import authentication from '../firebaseConfig';
 import scheduleContext from '../Context/Context';
 import './Login.css';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     marginTop: `${theme.spacing(marginPaddingWidth)}px`,
-//     justifyContent: 'center',
-//     alignContent: 'center',
-//     display: 'flex',
-//   },
-//   grid: {
-//     maxWidth: 400,
-//     margin: `${theme.spacing(1)}px auto`,
-//     padding: theme.spacing(marginPaddingWidth),
-//     textAlign: 'center',
-//   },
-//   card: {
-//     width: `${theme.spacing(marginPaddingWidth)}vw`,
-//     minWidth: 320,
-//     backgroundColor: '#F8F8F1',
-//   },
-// }));
 
 export default function SimpleContainer() {
   const history = useHistory();
@@ -71,6 +53,7 @@ export default function SimpleContainer() {
     <main className="login-main">
       <form className="login-forms">
         <h1>ClinicApp</h1>
+        <FontAwesomeIcon icon={ faCalendarCheck } className="login-icon" />
         <div className="login-input">
           <label htmlFor="email-input">
             <input
@@ -96,7 +79,12 @@ export default function SimpleContainer() {
         <div className="login-input">
           <button type="button" onClick={ signIn }>ENTRAR</button>
         </div>
-        {showError ? <p>Email ou senha invalidos</p> : ''}
+        {showError
+          ? (
+            <div className="login-error">
+              <p>Email ou senha inválidos</p>
+            </div>)
+          : ''}
       </form>
     </main>
   );

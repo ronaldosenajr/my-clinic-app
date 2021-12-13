@@ -15,6 +15,7 @@ body {
 .login-forms {
 	display: flex;
 	align-items: center;
+	align-content: center;
 	justify-content: center;
 	flex-direction: column;
 	background-color: #F8F8F1;
@@ -26,11 +27,13 @@ body {
 
 .login-forms h1 {
 	color: #1a4d5e;
-	margin-bottom: 50%;
+	margin-bottom: 5%;
 }
 
-.login-input {
-	margin-bottom: 10%;
+.login-icon{
+	margin-bottom: 45%;
+	font-size: 40px;
+	color: #1a4d5e;
 }
 
 .login-input input {
@@ -38,6 +41,7 @@ body {
 	border: none;
 	border-bottom: 1px solid rgba(129, 129, 129, 0.651);
 	width: 12em;
+	margin-bottom: 50px;
 }
 
 .login-input input:focus {
@@ -59,4 +63,10 @@ body {
 	color: #19647E;
 	border: 2px solid #19647E;
 	transition: all ease-in 0.1s;
+}
+
+.login-error p {
+	color: rgb(206, 36, 36);
+	text-align: center;
+	vertical-align: bottom;
 }
