@@ -93,7 +93,7 @@ export default function SimpleContainer() {
           </label>
         </div>
         <div>
-          <button type="button" onClick={ signIn }>Entrar</button>
+          <button type="button" onClick={ signIn }>ENTRAR</button>
         </div>
         {showError ? <p>Email ou senha invalidos</p> : ''}
       </form>

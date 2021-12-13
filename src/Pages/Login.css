@@ -17,7 +17,7 @@
 	margin-top: 2rem;
 	padding: 2rem 2rem;
 	width: 20rem;
-	box-shadow: 2px 2px 2px 1px rgba(6, 7, 14, 0.2);
+	box-shadow: -2px 2px 5px 1px rgba(6, 7, 14, 0.2);
 }
 
 .login-forms h1 {
@@ -27,4 +27,14 @@
 
 .login-input {
 	margin-bottom: 5%;
+}
+
+.login-input input {
+	background-color:#F8F8F1;
+	border: none;
+	border-bottom: 1px solid rgba(129, 129, 129, 0.651);
+}
+
+.login-input input:focus {
+	outline: none;
 }
