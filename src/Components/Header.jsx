@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarCheck, faUserCircle,
+  faUsers, faCalendarDay, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import scheduleContext from '../Context/Context';
 import authentication from '../firebaseConfig';
 import './Header.css';
@@ -24,6 +27,7 @@ export default function Header() {
     <header>
       <nav>
         <label htmlFor="perfil-input" className="nav-button">
+          <div><FontAwesomeIcon icon={ faUserCircle } className="icon" /></div>
           Perfil
           <input
             type="button"
@@ -32,6 +36,7 @@ export default function Header() {
           />
         </label>
         <label htmlFor="pacientes-input" className="nav-button">
+          <div><FontAwesomeIcon icon={ faUsers } className="icon" /></div>
           Pacientes
           <input
             type="button"
@@ -40,6 +45,7 @@ export default function Header() {
           />
         </label>
         <label htmlFor="frequencia-input" className="nav-button">
+          <div><FontAwesomeIcon icon={ faCalendarCheck } className="icon" /></div>
           Frequência
           <input
             type="button"
@@ -48,6 +54,7 @@ export default function Header() {
           />
         </label>
         <label htmlFor="agenda-input" className="nav-button">
+          <div><FontAwesomeIcon icon={ faCalendarDay } className="icon" /></div>
           Agenda
           <input
             type="button"
@@ -55,11 +62,12 @@ export default function Header() {
             onClick={ (e) => handleChange(e, agendaValue) }
           />
         </label>
-        <label htmlFor="pacientes-input" className="sair-button">
+        <label htmlFor="sair-input" className="nav-button">
+          <div><FontAwesomeIcon icon={ faSignOutAlt } className="icon" /></div>
           Sair
           <input
             type="button"
-            id="pacientes-input"
+            id="sair-input"
             onClick={ logOut }
           />
         </label>
