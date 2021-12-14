@@ -12,8 +12,11 @@ export default function Header() {
   const { setTabValue } = useContext(scheduleContext);
   const history = useHistory();
 
-  const handleChange = (event, newValue) => {
+  const handleChange = ({ target }, newValue) => {
+    const oldTab = document.querySelector('.selected');
+    oldTab.className = 'nav-button';
     setTabValue(newValue);
+    target.parentElement.className = 'nav-button selected';
   };
 
   const logOut = async () => {
@@ -35,7 +38,7 @@ export default function Header() {
             onClick={ (e) => handleChange(e, 0) }
           />
         </label>
-        <label htmlFor="pacientes-input" className="nav-button">
+        <label htmlFor="pacientes-input" className="nav-button selected">
           <div><FontAwesomeIcon icon={ faUsers } className="icon" /></div>
           Pacientes
           <input
