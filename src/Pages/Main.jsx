@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import scheduleContext from '../Context/Context';
 import TabPanel from '../Components/TabPanel';
-import NewHeader from '../Components/NewHeader';
+import Header from '../Components/Header';
 import authentication from '../firebaseConfig';
 
 export default function Main() {
@@ -13,7 +13,7 @@ export default function Main() {
   };
   return (
     <div>
-      <NewHeader />
+      <Header />
       <TabPanel value={ tabValue } index={ 0 }>
         Usuario
         {' '}

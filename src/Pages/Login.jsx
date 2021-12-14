@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -77,7 +76,13 @@ export default function SimpleContainer() {
           </label>
         </div>
         <div className="login-input">
-          <button type="button" onClick={ signIn }>ENTRAR</button>
+          <button
+            type="button"
+            onClick={ signIn }
+            disabled={ emailValid }
+          >
+            ENTRAR
+          </button>
         </div>
         {showError
           ? (
