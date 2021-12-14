@@ -1,37 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { loadCSS } from 'fg-loadcss';
-import { Grid, TextField, Button, Card, Typography, Icon } from '@material-ui/core';
-import { Alert } from 'react-bootstrap';
-import { makeStyles } from '@material-ui/core/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import authentication from '../firebaseConfig';
 import scheduleContext from '../Context/Context';
-
-const marginPaddingWidth = 4;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: `${theme.spacing(marginPaddingWidth)}px`,
-    justifyContent: 'center',
-    alignContent: 'center',
-    display: 'flex',
-  },
-  grid: {
-    maxWidth: 400,
-    margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(marginPaddingWidth),
-    textAlign: 'center',
-  },
-  card: {
-    width: `${theme.spacing(marginPaddingWidth)}vw`,
-    minWidth: 320,
-    backgroundColor: '#F8F8F1',
-  },
-}));
+import './Login.css';
 
 export default function SimpleContainer() {
-  const classes = useStyles();
   const history = useHistory();
 
   const [userEmail, setUserEmail] = useState('');
@@ -65,7 +42,6 @@ export default function SimpleContainer() {
       const { user } = userCredential;
       setPassword('');
       setUser(user);
-      // localStorage.setItem('user', JSON.stringify(user));
       history.push('/main');
     } catch (error) {
       console.log(error);
@@ -73,75 +49,43 @@ export default function SimpleContainer() {
     }
   };
 
-  useEffect(() => {
-    const node = loadCSS(
-      'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
-      document.querySelector('#font-awesome-css'),
-    );
-
-    return () => {
-      node.parentNode.removeChild(node);
-    };
-  }, []);
-
   return (
-    <div className={ classes.root }>
-      <form>
-        <Card variant="outlined" className={ classes.card }>
-          <Grid item xs zeroMinWidth className={ classes.grid }>
-            <Icon
-              className="far fa-calendar-check"
-              style={ { color: '#04294D' } }
-              fontSize="large"
-            />
-            <Typography
-              style={ { color: '#04294D' } }
-              variant="h5"
-              align="center"
-            >
-              Faça o seu login
-            </Typography>
-          </Grid>
-          <Grid item xs zeroMinWidth className={ classes.grid }>
-            <TextField
-              id="email"
-              label="Email"
+    <main className="login-main">
+      <form className="login-forms">
+        <h1>ClinicApp</h1>
+        <FontAwesomeIcon icon={ faCalendarCheck } className="login-icon" />
+        <div className="login-input">
+          <label htmlFor="email-input">
+            <input
+              placeholder="Email"
               type="email"
-              error={ emailValid }
+              id="email-input"
               value={ userEmail }
               onChange={ ({ target }) => validateEmail(target.value) }
             />
-          </Grid>
-          <Grid item xs zeroMinWidth className={ classes.grid }>
-            <TextField
-              id="password"
-              label="Senha"
+          </label>
+        </div>
+        <div className="login-input">
+          <label htmlFor="password-input">
+            <input
+              placeholder="Senha"
               type="password"
+              id="password-input"
               value={ password }
               onChange={ ({ target }) => setPassword(target.value) }
             />
-          </Grid>
-          <Grid item xs zeroMinWidth className={ classes.grid }>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={ signIn }
-            >
-              Entrar
-            </Button>
-          </Grid>
-          <Grid>
-            {showError ? (
-              <Alert
-                variant="danger"
-                style={ { textAlign: 'center' } }
-              >
-                Email ou senha incorreto
-              </Alert>
-            ) : ''}
-          </Grid>
-        </Card>
+          </label>
+        </div>
+        <div className="login-input">
+          <button type="button" onClick={ signIn }>ENTRAR</button>
+        </div>
+        {showError
+          ? (
+            <div className="login-error">
+              <p>Email ou senha inválidos</p>
+            </div>)
+          : ''}
       </form>
-    </div>
+    </main>
   );
 }
