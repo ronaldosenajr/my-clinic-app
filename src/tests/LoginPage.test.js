@@ -1,5 +1,6 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -32,8 +33,26 @@ describe('Testa a Tela de Login', () => {
    quando não insere um email ou senha corretos`, async () => {
     renderWithRouter(<App />);
     const logInButton = screen.getByRole('button', { name: 'ENTRAR' });
-    fireEvent.click(logInButton);
+    userEvent.click(logInButton);
     const invalidEmailText = await screen.findByText('Email ou senha inválidos');
     expect(invalidEmailText).toBeInTheDocument();
+  });
+});
+
+describe('Testa as funções da Tela de Login', () => {
+  it('Se o Campo Email tem um valor vazio e depois um valor "teste@email.com"', () => {
+    renderWithRouter(<App />);
+    const emailInput = screen.getByRole('textbox');
+    expect(emailInput).toHaveValue('');
+    userEvent.type(emailInput, 'teste@email.com');
+    expect(emailInput).toHaveValue('teste@email.com');
+  });
+
+  it('Se o Campo Senha tem um valor vazio e depois um valor "teste123"', () => {
+    renderWithRouter(<App />);
+    const passwordInput = screen.getByPlaceholderText('Senha');
+    expect(passwordInput).toHaveValue('');
+    userEvent.type(passwordInput, 'teste123');
+    expect(passwordInput).toHaveValue('teste123');
   });
 });
