@@ -23,41 +23,46 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <button
-          type="button"
-          onClick={ (e) => handleChange(e, 0) }
-          className="nav-button"
-        >
+        <label htmlFor="perfil-input" className="nav-button">
           Perfil
-        </button>
-        <button
-          type="button"
-          onClick={ (e) => handleChange(e, 1) }
-          className="nav-button"
-        >
+          <input
+            type="button"
+            id="perfil-input"
+            onClick={ (e) => handleChange(e, 0) }
+          />
+        </label>
+        <label htmlFor="pacientes-input" className="nav-button">
           Pacientes
-        </button>
-        <button
-          type="button"
-          onClick={ (e) => handleChange(e, 2) }
-          className="nav-button"
-        >
+          <input
+            type="button"
+            id="pacientes-input"
+            onClick={ (e) => handleChange(e, 1) }
+          />
+        </label>
+        <label htmlFor="frequencia-input" className="nav-button">
           Frequência
-        </button>
-        <button
-          type="button"
-          onClick={ (e) => handleChange(e, agendaValue) }
-          className="nav-button"
-        >
+          <input
+            type="button"
+            id="frequencia-input"
+            onClick={ (e) => handleChange(e, 2) }
+          />
+        </label>
+        <label htmlFor="agenda-input" className="nav-button">
           Agenda
-        </button>
-        <button
-          type="button"
-          onClick={ logOut }
-          className="nav-button"
-        >
+          <input
+            type="button"
+            id="agenda-input"
+            onClick={ (e) => handleChange(e, agendaValue) }
+          />
+        </label>
+        <label htmlFor="pacientes-input" className="sair-button">
           Sair
-        </button>
+          <input
+            type="button"
+            id="pacientes-input"
+            onClick={ logOut }
+          />
+        </label>
       </nav>
     </header>
   );
