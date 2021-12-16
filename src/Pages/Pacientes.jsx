@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from 'react';
 import scheduleContext from '../Context/Context';
+import Patient from '../Components/Patient';
 
 export default function Pacientes() {
   const [showCreatePatient, setShowCreatePatient] = useState(false);
@@ -13,6 +13,7 @@ export default function Pacientes() {
 
   useEffect(() => {
     getPatients();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function Pacientes() {
       setShowPacients(true);
       console.log('chamou no if do patients.length');
     }
-  }, [patients]);
+  }, [patients, showPacients]);
 
   const handleCreatePatientClick = () => {
     setShowCreatePatient(true);
@@ -46,13 +47,11 @@ export default function Pacientes() {
   return (
     <div>
       <section>
-        {showPacients && patients.map((value) => (
-          value.nome && (
-            <h3 key={ value.nome }>
-              nome:
-              {' '}
-              {value.nome}
-            </h3>)))}
+        <ul>
+          {showPacients && patients.map((value) => (
+            <Patient key={ value.nome } name={ value.nome } />
+          ))}
+        </ul>
         <button
           type="button"
           onClick={ handleCreatePatientClick }
