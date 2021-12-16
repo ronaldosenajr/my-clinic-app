@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from 'react';
 import scheduleContext from '../Context/Context';
 
@@ -7,11 +8,19 @@ export default function Pacientes() {
   const [answerableName, setAnswerableName] = useState('');
   const [answerableEmail, setAnswerableEmail] = useState('');
   const [cpf, setCpf] = useState('');
-  const { patients, createNewPatient } = useContext(scheduleContext);
+  const [showPacients, setShowPacients] = useState(false);
+  const { patients, createNewPatient, getPatients } = useContext(scheduleContext);
 
   useEffect(() => {
-    console.log('recarregadou a page');
+    getPatients();
   }, []);
+
+  useEffect(() => {
+    if (patients.length > 0 && !showPacients) {
+      setShowPacients(true);
+      console.log('chamou no if do patients.length');
+    }
+  }, [patients]);
 
   const handleCreatePatientClick = () => {
     setShowCreatePatient(true);
@@ -37,12 +46,13 @@ export default function Pacientes() {
   return (
     <div>
       <section>
-        {patients.map((value) => (
-          <h3 key={ value.nome }>
-            nome:
-            {' '}
-            {value.nome}
-          </h3>))}
+        {showPacients && patients.map((value) => (
+          value.nome && (
+            <h3 key={ value.nome }>
+              nome:
+              {' '}
+              {value.nome}
+            </h3>)))}
         <button
           type="button"
           onClick={ handleCreatePatientClick }

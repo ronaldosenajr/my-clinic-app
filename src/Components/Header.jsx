@@ -8,7 +8,7 @@ import authentication from '../firebaseConfig';
 import './Header.css';
 
 export default function Header() {
-  const { setUser } = useContext(scheduleContext);
+  const { setUser, setPatients } = useContext(scheduleContext);
   const { setTabValue } = useContext(scheduleContext);
   const history = useHistory();
 
@@ -22,6 +22,7 @@ export default function Header() {
   const logOut = async () => {
     await authentication.signOut();
     setUser({});
+    setPatients([]);
     history.push('/');
   };
 

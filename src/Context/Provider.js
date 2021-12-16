@@ -10,17 +10,16 @@ function ScheduleProvider({ children }) {
   const [patients, setPatients] = useState([]);
 
   const patientsCollectionRef = collection(db, 'pacientes');
+
   const getPatients = async () => {
-    const data = await getDocs(patientsCollectionRef);
-    setPatients(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    if (user !== null) {
+      const data = await getDocs(patientsCollectionRef);
+      setPatients(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
   };
 
   useEffect(() => {
     authentication.onAuthStateChanged(setUser);
-  }, []);
-  useEffect(() => {
-    getPatients();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createNewPatient = async (patient) => {
@@ -35,6 +34,8 @@ function ScheduleProvider({ children }) {
     setTabValue,
     patients,
     createNewPatient,
+    setPatients,
+    getPatients,
   };
   return (
     <scheduleOfficer.Provider value={ contextValue }>
