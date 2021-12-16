@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import scheduleContext from '../Context/Context';
-import TabPanel from '../Components/TabPanel';
+import ContentPanel from '../Components/ContentPanel';
 import Header from '../Components/Header';
+import Pacientes from './Pacientes';
 import authentication from '../firebaseConfig';
 
 export default function Main() {
@@ -12,23 +13,23 @@ export default function Main() {
     authentication.signOut();
   };
   return (
-    <div>
+    <main>
       <Header />
-      <TabPanel value={ tabValue } index={ 0 }>
+      <ContentPanel value={ tabValue } index={ 0 }>
         Usuario
         {' '}
         {user ? user.email : ''}
         <button type="button" onClick={ logOut }>Sair</button>
-      </TabPanel>
-      <TabPanel value={ tabValue } index={ 1 }>
-        Pacientes
-      </TabPanel>
-      <TabPanel value={ tabValue } index={ 2 }>
+      </ContentPanel>
+      <ContentPanel value={ tabValue } index={ 1 }>
+        <Pacientes />
+      </ContentPanel>
+      <ContentPanel value={ tabValue } index={ 2 }>
         Frequência
-      </TabPanel>
-      <TabPanel value={ tabValue } index={ 3 }>
+      </ContentPanel>
+      <ContentPanel value={ tabValue } index={ 3 }>
         Agenda
-      </TabPanel>
-    </div>
+      </ContentPanel>
+    </main>
   );
 }
