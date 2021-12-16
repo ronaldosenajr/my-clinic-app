@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import scheduleContext from '../Context/Context';
 
 export default function Pacientes() {
   const [showCreatePatient, setShowCreatePatient] = useState(false);
@@ -6,26 +7,28 @@ export default function Pacientes() {
   const [answerableName, setAnswerableName] = useState('');
   const [answerableEmail, setAnswerableEmail] = useState('');
   const [cpf, setCpf] = useState('');
-  const [newPatient, setNewPatient] = useState('');
+  const { patients, createNewPatient } = useContext(scheduleContext);
 
   const handleCreatePatientClick = () => {
     setShowCreatePatient(true);
   };
 
-  const saveNewPatient = () => {
+  const saveNewPatient = async () => {
     const patient = { nome: patientName,
       responsavel: answerableName,
       email: answerableEmail,
       cpf };
-    setNewPatient(patient);
-    setPatientName('');
-    setAnswerableEmail('');
-    setAnswerableName('');
-    setCpf('');
   };
+
   return (
     <div>
       <section>
+        {patients.map((value) => (
+          <h3 key={ value.nome }>
+            nome:
+            {' '}
+            {value.nome}
+          </h3>))}
         <button
           type="button"
           onClick={ handleCreatePatientClick }
@@ -74,7 +77,7 @@ export default function Pacientes() {
             <button type="button" onClick={ saveNewPatient }>Salvar</button>
             <button
               type="button"
-              onClick={ (_) => setShowCreatePatient(false) }
+              onClick={ () => setShowCreatePatient(false) }
             >
               Fechar
             </button>
