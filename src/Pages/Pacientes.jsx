@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import scheduleContext from '../Context/Context';
 
 export default function Pacientes() {
@@ -9,8 +9,19 @@ export default function Pacientes() {
   const [cpf, setCpf] = useState('');
   const { patients, createNewPatient } = useContext(scheduleContext);
 
+  useEffect(() => {
+    console.log('recarregadou a page');
+  }, []);
+
   const handleCreatePatientClick = () => {
     setShowCreatePatient(true);
+  };
+
+  const clearPatientAddedValues = () => {
+    setPatientName('');
+    setAnswerableEmail('');
+    setAnswerableName('');
+    setCpf('');
   };
 
   const saveNewPatient = async () => {
@@ -18,6 +29,9 @@ export default function Pacientes() {
       responsavel: answerableName,
       email: answerableEmail,
       cpf };
+    createNewPatient(patient);
+    setShowCreatePatient(false);
+    clearPatientAddedValues();
   };
 
   return (
