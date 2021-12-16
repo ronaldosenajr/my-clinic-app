@@ -40,15 +40,14 @@ nav {
 }
 
 .nav-button:hover {
-	transition: all ease-in 0.3s;
-	border-bottom: 2px solid rgba(201, 68, 123, 0.89);
-	color: rgba(68, 77, 201, 0.89);
+	transition: all ease-in 0.1s;
+	color: #2C83A0;
 }
 
 .selected {
-	transition: all ease-in 0.3s;
+	transition: all ease-in 0.2s;
 	border-bottom: 2px solid rgba(201, 68, 123, 0.89);
-	color: rgba(68, 77, 201, 0.89);
+	color: #3FA7CA;
 }
 
 .nav-button input:focus {
